@@ -4,10 +4,17 @@ const translations = {
   he: {
     // Hero
     heroTitle: "גלה את עולם ההשקעות — בלי לסכן שקל",
+    heroTitleLine1: "גלה את עולם ההשקעות",
+    heroTitleLine2: "בלי לסכן שקל",
     heroSubtitle: "התנסה בקנייה ומכירה של מניות עם כסף וירטואלי, בסביבה בטוחה לחלוטין",
     heroCTA: "התחל לסמלץ עכשיו",
+    heroBadge: "סימולציה חינמית • ללא סיכון",
+    trustSafe: "100% בטוח",
+    trustNoSignup: "ללא הרשמה",
+    trustVirtual: "$10,000 וירטואלי",
     // Simulator
     simulatorTitle: "סימולטור השקעות",
+    simulatorSubtitle: "קנה, מכור, ולמד",
     wallet: "ארנק",
     cashBalance: "יתרת מזומן",
     portfolioValue: "שווי תיק",
@@ -35,19 +42,35 @@ const translations = {
     send: "שלח",
     formSuccess: "הפרטים נשלחו בהצלחה! נחזור אליך בקרוב",
     formError: "שגיאה בשליחה, נסה שוב",
+    disclaimer: "סימולטור למטרות לימודיות בלבד. אין באמור ייעוץ השקעות.",
+    boughtShares: "נרכשו {qty} יחידות של {symbol}",
+    soldShares: "נמכרו {qty} יחידות של {symbol}",
+    insufficientBalance: "אין מספיק יתרה",
+    insufficientShares: "אין מספיק יחידות",
     invalidPhone: "מספר טלפון לא תקין",
     invalidEmail: "כתובת אימייל לא תקינה",
     nameRequired: "שם מלא הוא שדה חובה",
     phoneRequired: "טלפון הוא שדה חובה",
+    // Nav
+    navHome: "דף הבית",
+    navSimulator: "סימולטור",
+    navContact: "צור קשר",
     // General
     language: "English",
     resetPortfolio: "איפוס תיק",
   },
   en: {
     heroTitle: "Discover the World of Investing — Risk Free",
+    heroTitleLine1: "Discover Investing",
+    heroTitleLine2: "Risk Free",
     heroSubtitle: "Practice buying and selling stocks with virtual money, in a completely safe environment",
     heroCTA: "Start Simulating Now",
+    heroBadge: "Free Simulation • Risk Free",
+    trustSafe: "100% Safe",
+    trustNoSignup: "No Sign Up",
+    trustVirtual: "$10,000 Virtual",
     simulatorTitle: "Investment Simulator",
+    simulatorSubtitle: "Buy, sell, and learn",
     wallet: "Wallet",
     cashBalance: "Cash Balance",
     portfolioValue: "Portfolio Value",
@@ -74,10 +97,18 @@ const translations = {
     send: "Send",
     formSuccess: "Details sent successfully! We'll be in touch soon",
     formError: "Error sending, please try again",
+    disclaimer: "Simulator for educational purposes only. Not investment advice.",
+    boughtShares: "Bought {qty} shares of {symbol}",
+    soldShares: "Sold {qty} shares of {symbol}",
+    insufficientBalance: "Insufficient balance",
+    insufficientShares: "Insufficient shares",
     invalidPhone: "Invalid phone number",
     invalidEmail: "Invalid email address",
     nameRequired: "Full name is required",
     phoneRequired: "Phone is required",
+    navHome: "Home",
+    navSimulator: "Simulator",
+    navContact: "Contact",
     language: "עברית",
     resetPortfolio: "Reset Portfolio",
   },
@@ -86,7 +117,7 @@ const translations = {
 export type TranslationKey = keyof typeof translations.he;
 
 export function t(locale: Locale, key: TranslationKey): string {
-  return translations[locale][key];
+  return (translations[locale] as Record<string, string>)[key];
 }
 
 export function getDirection(locale: Locale): "rtl" | "ltr" {

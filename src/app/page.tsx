@@ -7,7 +7,8 @@ import { Hero } from "@/components/hero";
 import { Simulator } from "@/components/simulator/simulator";
 import { ContactForm } from "@/components/contact-form";
 import { WhatsAppFAB } from "@/components/whatsapp-fab";
-import { LanguageSwitcher } from "@/components/language-switcher";
+import { Header } from "@/components/header";
+import { Footer } from "@/components/footer";
 
 export default function Home() {
   const { locale } = useLanguageStore();
@@ -20,14 +21,12 @@ export default function Home() {
 
   return (
     <main className="min-h-screen">
-      {/* Header */}
-      <header className="fixed top-0 inset-x-0 z-40 flex justify-end p-4">
-        <LanguageSwitcher />
-      </header>
+      <Header />
 
       <Hero />
       <Simulator />
       <ContactForm />
+      <Footer />
       <WhatsAppFAB />
     </main>
   );

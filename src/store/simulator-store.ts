@@ -17,7 +17,10 @@ interface SimulatorState {
   buy: (assetId: string, symbol: string, price: number, quantity: number) => boolean;
   sell: (assetId: string, price: number, quantity: number) => boolean;
   reset: () => void;
-  getPortfolioItem: (assetId: string) => PortfolioItem | undefined;
+}
+
+export function getPortfolioItem(portfolio: PortfolioItem[], assetId: string): PortfolioItem | undefined {
+  return portfolio.find((p) => p.assetId === assetId);
 }
 
 export const useSimulatorStore = create<SimulatorState>()(
@@ -28,58 +31,57 @@ export const useSimulatorStore = create<SimulatorState>()(
 
       buy: (assetId, symbol, price, quantity) => {
         const cost = price * quantity;
-        if (cost > get().balance || quantity <= 0) return false;
+        const state = get();
+        if (cost > state.balance || quantity <= 0) return false;
 
-        const existing = get().portfolio.find((p) => p.assetId === assetId);
+        const existing = state.portfolio.find((p) => p.assetId === assetId);
 
         if (existing) {
           const newQty = existing.quantity + quantity;
           const newAvg =
             (existing.avgPrice * existing.quantity + price * quantity) / newQty;
 
-          set({
-            balance: get().balance - cost,
-            portfolio: get().portfolio.map((p) =>
+          set((s) => ({
+            balance: s.balance - cost,
+            portfolio: s.portfolio.map((p) =>
               p.assetId === assetId
                 ? { ...p, quantity: newQty, avgPrice: newAvg }
                 : p
             ),
-          });
+          }));
         } else {
-          set({
-            balance: get().balance - cost,
+          set((s) => ({
+            balance: s.balance - cost,
             portfolio: [
-              ...get().portfolio,
+              ...s.portfolio,
               { assetId, symbol, quantity, avgPrice: price },
             ],
-          });
+          }));
         }
         return true;
       },
 
       sell: (assetId, price, quantity) => {
-        const existing = get().portfolio.find((p) => p.assetId === assetId);
+        const state = get();
+        const existing = state.portfolio.find((p) => p.assetId === assetId);
         if (!existing || quantity > existing.quantity || quantity <= 0) return false;
 
         const revenue = price * quantity;
         const newQty = existing.quantity - quantity;
 
-        set({
-          balance: get().balance + revenue,
+        set((s) => ({
+          balance: s.balance + revenue,
           portfolio:
             newQty === 0
-              ? get().portfolio.filter((p) => p.assetId !== assetId)
-              : get().portfolio.map((p) =>
+              ? s.portfolio.filter((p) => p.assetId !== assetId)
+              : s.portfolio.map((p) =>
                   p.assetId === assetId ? { ...p, quantity: newQty } : p
                 ),
-        });
+        }));
         return true;
       },
 
       reset: () => set({ balance: INITIAL_BALANCE, portfolio: [] }),
-
-      getPortfolioItem: (assetId) =>
-        get().portfolio.find((p) => p.assetId === assetId),
     }),
     { name: "simulator-store" }
   )
