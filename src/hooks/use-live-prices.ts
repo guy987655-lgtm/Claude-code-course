@@ -20,13 +20,34 @@ export function useLivePrices() {
     return initial;
   });
 
+  // Fetch real prices from Yahoo Finance on mount
+  useEffect(() => {
+    fetch("/api/prices")
+      .then((r) => r.json())
+      .then((data: Record<string, number>) => {
+        if (data.error) return;
+        // Reset base prices to real market prices
+        basePrices.current = { ...basePrices.current, ...data };
+        setPrices((prev) => ({ ...prev, ...data }));
+        // Reset changes to 0 since we now have a fresh real baseline
+        setChanges((prev) => {
+          const next = { ...prev };
+          Object.keys(data).forEach((id) => (next[id] = 0));
+          return next;
+        });
+      })
+      .catch(() => {
+        // Silently fall back to mock prices
+      });
+  }, []);
+
   const tick = useCallback(() => {
     setPrices((prev) => {
       const next = { ...prev };
       const nextChanges: Record<string, number> = {};
 
       mockAssets.forEach((asset) => {
-        const volatility = 0.03;
+        const volatility = 0.003; // smaller fluctuation on top of real prices
         const change = (Math.random() - 0.5) * 2 * volatility;
         next[asset.id] = Math.max(1, prev[asset.id] * (1 + change));
         nextChanges[asset.id] =

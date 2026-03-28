@@ -6,6 +6,7 @@ import { getDirection } from "@/lib/i18n";
 import { Hero } from "@/components/hero";
 import { Simulator } from "@/components/simulator/simulator";
 import { ContactForm } from "@/components/contact-form";
+import { FAQ } from "@/components/faq";
 import { WhatsAppFAB } from "@/components/whatsapp-fab";
 import { Header } from "@/components/header";
 import { Footer } from "@/components/footer";
@@ -25,6 +26,7 @@ export default function Home() {
 
       <Hero />
       <Simulator />
+      <FAQ />
       <ContactForm />
       <Footer />
       <WhatsAppFAB />
