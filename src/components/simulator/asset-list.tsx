@@ -12,11 +12,13 @@ interface AssetListProps {
   onBuy: (asset: Asset) => void;
 }
 
-const TABS: { key: AssetCategory; labelKey: "tabTech" | "tabEnergy" | "tabEtf" | "tabChips" }[] = [
+const TABS: { key: AssetCategory; labelKey: "tabTech" | "tabEnergy" | "tabEtf" | "tabChips" | "tabBiotech" | "tabCyber" }[] = [
   { key: "tech", labelKey: "tabTech" },
   { key: "energy", labelKey: "tabEnergy" },
   { key: "etf", labelKey: "tabEtf" },
   { key: "chips", labelKey: "tabChips" },
+  { key: "biotech", labelKey: "tabBiotech" },
+  { key: "cyber", labelKey: "tabCyber" },
 ];
 
 export function AssetList({ prices, changes, onBuy }: AssetListProps) {

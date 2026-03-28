@@ -62,6 +62,8 @@ const translations = {
     tabEnergy: "אנרגיה",
     tabEtf: "תעודות סל",
     tabChips: "שבבים",
+    tabBiotech: "ביוטק",
+    tabCyber: "אבטחת סייבר",
     // FAQ
     faqTitle: "שאלות נפוצות",
     faqSubtitle: "הכל על הסימולטור",
@@ -132,6 +134,8 @@ const translations = {
     tabEnergy: "Energy",
     tabEtf: "ETFs",
     tabChips: "Chips",
+    tabBiotech: "Biotech",
+    tabCyber: "Cybersecurity",
     // FAQ
     faqTitle: "Frequently Asked Questions",
     faqSubtitle: "Everything about the simulator",
