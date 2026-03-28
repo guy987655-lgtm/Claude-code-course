@@ -58,6 +58,10 @@ const translations = {
     // General
     language: "English",
     resetPortfolio: "איפוס תיק",
+    tabTech: "טכנולוגיה",
+    tabEnergy: "אנרגיה",
+    tabEtf: "תעודות סל",
+    tabChips: "שבבים",
   },
   en: {
     heroTitle: "Discover the World of Investing — Risk Free",
@@ -111,6 +115,10 @@ const translations = {
     navContact: "Contact",
     language: "עברית",
     resetPortfolio: "Reset Portfolio",
+    tabTech: "Technology",
+    tabEnergy: "Energy",
+    tabEtf: "ETFs",
+    tabChips: "Chips",
   },
 } as const;
 
